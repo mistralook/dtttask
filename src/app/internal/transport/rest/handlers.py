@@ -1,16 +1,19 @@
 import json
 
-from django.http import JsonResponse, HttpResponse
-from app.internal.services.user_service import get_user
 from django.forms.models import model_to_dict
+from django.http import HttpResponse, JsonResponse
+
+from app.internal.services.user_service import get_user, check_authorization
 
 
 def get_info_about_user_via_id(request):
-    t_id = request.GET['t_id']
+    t_id = request.GET["t_id"]
     user_info = get_user(t_id)
+    reason, authorized = check_authorization(t_id)
     resp = model_to_dict(user_info)
-    resp = ", ".join([f"{key}: {value}" for key, value in resp.items()])
-    if user_info:
-        return HttpResponse(f'{resp}')
+    if authorized:
+        return JsonResponse(resp)
+    elif not authorized:
+        return JsonResponse({"error": "you need to set the phone first"})
     else:
-        return JsonResponse({'error': 'zero matches for this id'})
+        return JsonResponse({"error": "zero matches for this id"})
