@@ -1,9 +1,11 @@
+from django.core.exceptions import ObjectDoesNotExist
+
 from app.internal.models.user import User
 
 
 def create_user(first_name, last_name, username, t_id):
     obj, created = User.objects.get_or_create(
-        first_name=first_name, last_name=last_name, username=username, id=t_id, defaults={"phone": ""}
+        id=t_id, defaults={"phone": "", "first_name": first_name, "last_name": last_name, "username": username}
     )
     return created
 
@@ -13,14 +15,16 @@ def save_phone_number(phone, t_id):
 
 
 def get_user(t_id):
-    user = User.objects.get(id=t_id)
-    return user
+    try:
+        user = User.objects.get(id=t_id)
+        return user
+    except ObjectDoesNotExist:
+        return None
 
 
 def check_authorization(t_id):
-    try:
-        user = get_user(t_id)
-    except Exception:
+    user = get_user(t_id)
+    if user is None:
         return "Для начала нужно ввести команду /start", False
     else:
         if user.phone:

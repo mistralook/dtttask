@@ -27,7 +27,7 @@ def phone_num_handler(update, context):
     phone_number = str(update.message.text)
     if len(phone_number) != 12 or re.match(r"^(\+7+([0-9]){10})", phone_number) is None:
         update.message.reply_text("Номер введен неверно :( Попробуйте заново!")
-        set_phone(update, context)
+        return ConversationHandler.END
     else:
         t_id = update.message.from_user.id
         save_phone_number(phone_number, t_id)
