@@ -1,0 +1,43 @@
+version: "3.3"
+
+services:
+  bot:
+    container_name: doubletapp-bot
+    image: bot
+    build: .
+    ports:
+      - "8001:8001"
+    volumes:
+      - .:/app
+    env_file:
+      - ./src/config/.env
+    command: pipenv run python src/manage.py runbot
+    depends_on:
+      - db
+
+  app:
+    container_name: doubletapp-app
+    image: app
+    build: .
+    env_file:
+      - src/config/.env
+    command: >
+      bash -c "pipenv run python src/manage.py makemigrations &&
+               pipenv run python src/manage.py migrate && 
+               pipenv run python src/manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./src:/app/src
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  db:
+    container_name: doubletapp-db
+    image: postgres:14
+    env_file:
+      - src/config/.env
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./src/data:/var/lib/postgresql/data
