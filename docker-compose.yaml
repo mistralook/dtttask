@@ -22,7 +22,8 @@ services:
     env_file:
       - src/config/.env
     command: >
-      bash -c "pipenv run python src/manage.py makemigrations &&
+      bash -c "bash entrypoint.sh &&
+               pipenv run python src/manage.py makemigrations &&
                pipenv run python src/manage.py migrate && 
                pipenv run python src/manage.py runserver 0.0.0.0:8000"
     volumes:

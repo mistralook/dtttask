@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7d73360e68396603fbc6d9eec06af155e4abdcf60841bb6aa573c29586a9e344"
+            "sha256": "20d18861006737cdc7e8fb56aada668d3ce11335bdaf7524a36106edd699a392"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -30,6 +30,14 @@
             ],
             "markers": "python_version >= '3.7'",
             "version": "==3.5.0"
+        },
+        "babel": {
+            "hashes": [
+                "sha256:ab49e12b91d937cd11f0b67cb259a57ab4ad2b59ac7a3b41d6c06c0ac5b0def9",
+                "sha256:bc0c176f9f6a994582230df350aa6e05ba2ebe4b3ac317eab29d9be5d2768da0"
+            ],
+            "markers": "python_version >= '2.7' and python_version not in '3.0, 3.1, 3.2, 3.3'",
+            "version": "==2.9.1"
         },
         "black": {
             "hashes": [
@@ -85,6 +93,14 @@
             ],
             "index": "pypi",
             "version": "==0.8.1"
+        },
+        "django-money": {
+            "hashes": [
+                "sha256:4d06041fac5c565ad049a7f8fb4bc33de5c68047b0693efa18a9931cebffb606",
+                "sha256:60a605d5b999e1756a18008dd7e0c5a860fd64c018a140c7a7675a4209ec3782"
+            ],
+            "index": "pypi",
+            "version": "==2.1.1"
         },
         "flake8": {
             "hashes": [
@@ -192,6 +208,13 @@
             ],
             "index": "pypi",
             "version": "==2.9.3"
+        },
+        "py-moneyed": {
+            "hashes": [
+                "sha256:c6131c7b7c1f8503552afe44d15c343ea50282d1d9e6fa8b3f1bd2affc1dae1e",
+                "sha256:d745a52819604f42b3666f9b2504b71c27c1645d6d5027d95ec5ed1f28ca86e3"
+            ],
+            "version": "==1.2"
         },
         "pycodestyle": {
             "hashes": [
