@@ -6,7 +6,7 @@ from .user import User
 
 class Card(models.Model):
     card_number = models.BigIntegerField(primary_key=True)
-    id = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    owner_id = models.ForeignKey(User, on_delete=models.CASCADE, db_column="owner_id")
     balance = MoneyField(max_digits=14, decimal_places=2, null=True, default_currency=None)
     account = models.ForeignKey(Account, on_delete=models.CASCADE)
 

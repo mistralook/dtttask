@@ -3,12 +3,14 @@ ENV PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-COPY Pipfile Pipfile.lock /app/
-
 RUN apt update && \
     apt-get install -y netcat && \
     pip install --no-cache pipenv && \
-    pipenv install
+    rm -rf /var/lib/apt/lists/*
+
+COPY Pipfile Pipfile.lock /app/
+
+RUN pipenv install
 
 EXPOSE 8000
 
