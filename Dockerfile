@@ -10,7 +10,7 @@ RUN apt update && \
 
 COPY Pipfile Pipfile.lock /app/
 
-RUN pipenv install
+RUN pipenv install --system
 
 EXPOSE 8000
 
