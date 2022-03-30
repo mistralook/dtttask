@@ -1,6 +1,5 @@
 image: docker/compose:alpine-1.28.0
 
-
 stages:
   - build
   - lint
@@ -11,7 +10,6 @@ before_script:
   - apk add make
   - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   - cat $DOT_ENV > $(pwd)/.env
-  - cat .env
 
 build:
   stage: build

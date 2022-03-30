@@ -1,6 +1,6 @@
 import re
 
-from app.internal.services.bank_services import get_balance_by_card, get_balance_by_account
+from app.internal.services.bank_services import get_balance_by_account, get_balance_by_card
 
 
 def get_balance(t_id, subject, subject_number, balance_method):
@@ -22,7 +22,7 @@ def balance_by_card(update, context):
     args = context.args
     if not args:
         return update.message.reply_text(
-            f"To get balance via card number, you need to write it after. F.e. " f"/balance_by_card 1234546789012345"
+            "To get balance via card number, you need to write it after. F.e. /balance_by_card 1234546789012345"
         )
     if len(args) == 1:
         card_number = args[0]
@@ -41,7 +41,7 @@ def balance_by_account(update, context):
     args = context.args
     if not args:
         return update.message.reply_text(
-            f"To get balance via account number, you need to write it after. " f"F.e. /balance_by_account 1234..."
+            "To get balance via account number, you need to write it after. F.e. /balance_by_account 1234..."
         )
     account_number = args[0]
     balance = get_balance(t_id, "account", account_number, get_balance_by_account)

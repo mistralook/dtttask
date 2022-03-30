@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from app.internal.models.user import User
 
 

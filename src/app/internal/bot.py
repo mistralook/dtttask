@@ -1,8 +1,8 @@
 # from django.conf import settings
 from telegram.ext import CommandHandler, ConversationHandler, Filters, MessageHandler, Updater
 
+from app.internal.transport.bot.bank_handlers import balance_by_account, balance_by_card
 from app.internal.transport.bot.handlers import error, me, phone_num_handler, set_phone, start_command
-from app.internal.transport.bot.bank_handlers import balance_by_card, balance_by_account
 from config.settings import API_TOKEN
 
 
