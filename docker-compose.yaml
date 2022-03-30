@@ -3,7 +3,7 @@ version: "3.3"
 services:
   bot:
     container_name: doubletapp-bot
-    image: bot
+    image: "${IMAGE_APP}"
     build: .
     env_file:
       - .env
@@ -13,7 +13,7 @@ services:
 
   app:
     container_name: doubletapp-app
-    image: app
+    image: "${IMAGE_APP}"
     build: .
     env_file:
       - .env
