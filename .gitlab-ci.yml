@@ -12,6 +12,10 @@ before_script:
   - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   - cat $DOT_ENV > $(pwd)/.env
 
+variables:
+  IMAGE_APP: "${IMAGE_APP}"
+  HOST_PORT: "${HOST_PORT}"
+
 build:
   stage: build
   script:
