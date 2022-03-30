@@ -60,4 +60,4 @@ push:
 	docker-compose push ${IMAGE_APP}
 
 test:
-	echo "test"
+	echo "tests"
