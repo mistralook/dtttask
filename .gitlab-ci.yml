@@ -13,10 +13,6 @@ before_script:
   - cat $DOT_ENV > $(pwd)/.env
   - cat .env
 
-variables:
-  IMAGE_APP: "${IMAGE_APP}"
-  HOST_PORT: "${HOST_PORT}"
-
 build:
   stage: build
   script:
