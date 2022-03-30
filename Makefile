@@ -38,7 +38,7 @@ lint:
 	black --config pyproject.toml .
 
 check_lint:
-	docker run --rm "${IMAGE_APP}"
+	docker run --rm app
 	docker-compose run --rm app isort --check --diff .
 	docker-compose run --rm app flake8 --config setup.cfg
 	docker-compose run --rm app black --check --config pyproject.toml .
