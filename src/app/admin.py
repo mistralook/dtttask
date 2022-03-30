@@ -8,4 +8,3 @@ from app.internal.admin.card import CardAdmin
 
 admin.site.site_title = "Backend course"
 admin.site.site_header = "Backend course"
-

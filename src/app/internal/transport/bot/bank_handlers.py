@@ -6,7 +6,7 @@ from app.internal.services.bank_services import get_balance_by_card, get_balance
 def get_balance(t_id, subject, subject_number, balance_method):
     balance = balance_method(t_id, subject_number)
     if balance is None:
-        return f"${subject} not found"
+        return f"{subject} not found"
     return f"{balance}"
 
 
@@ -22,8 +22,8 @@ def balance_by_card(update, context):
     args = context.args
     if not args:
         return update.message.reply_text(
-            f"To get balance via card number, you need to write it after. F.e. "
-            f"/balance_by_card 1234546789012345")
+            f"To get balance via card number, you need to write it after. F.e. " f"/balance_by_card 1234546789012345"
+        )
     if len(args) == 1:
         card_number = args[0]
         card_number = card_number.replace("-", "")
@@ -41,8 +41,8 @@ def balance_by_account(update, context):
     args = context.args
     if not args:
         return update.message.reply_text(
-            f"To get balance via account number, you need to write it after. "
-            f"F.e. /balance_by_account 1234...")
+            f"To get balance via account number, you need to write it after. " f"F.e. /balance_by_account 1234..."
+        )
     account_number = args[0]
     balance = get_balance(t_id, "account", account_number, get_balance_by_account)
     update.message.reply_text(balance)
