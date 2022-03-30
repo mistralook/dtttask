@@ -1,4 +1,3 @@
-include .env
 
 all: down build docker-makemigrations migrate up
 
