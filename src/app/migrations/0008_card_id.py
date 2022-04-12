@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='card',
-            name='id',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='app.user'),
+            name='owner_id',
+            field=models.ForeignKey(db_column="owner_id", on_delete=django.db.models.deletion.CASCADE, to='app.user'),
         ),
     ]
