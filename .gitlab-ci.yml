@@ -47,7 +47,7 @@ test:
 deploy:
   stage: deploy
   script:
-    - make pull up
+    - make pull down migrate up
   tags:
     - job:deploy
   only:
