@@ -29,8 +29,8 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG")
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", env("HOST_IP"), "triplehover.backend22.2tapp.cc"]
-
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", env("HOST_IP"), env("HOST_NAME")]
+CSRF_TRUSTED_ORIGINS = [f'https://{env("HOST_NAME")}']
 
 # Application definition
 
