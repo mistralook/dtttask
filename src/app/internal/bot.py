@@ -6,8 +6,7 @@ from telegram.ext import CommandHandler, ConversationHandler, Filters, MessageHa
 
 from app.internal.transport.bot.bank_handlers import balance_by_account, balance_by_card
 from app.internal.transport.bot.handlers import error, me, phone_num_handler, set_phone, start_command
-from config.settings import API_TOKEN, HOST_NAME
-
+from config.settings import API_TOKEN
 
 class TBot:
     def __init__(self):
@@ -30,7 +29,7 @@ class TBot:
         self.dp.add_error_handler(error)
 
     def set_webhook(self):
-        self.bot.setWebhook(url=HOST_NAME)
+        self.bot.setWebhook(url="triplehover.backend22.2tapp.cc")
 
     def webhook(self, update):
         self.dp.process_update(update)
