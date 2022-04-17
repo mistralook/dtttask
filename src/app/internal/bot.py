@@ -33,7 +33,7 @@ class TBot:
     # def set_webhook(self):
     #     self.bot.setWebhook(url="triplehover.backend22.2tapp.cc")
 
-    def poll(self, update):
+    def poll(self):
         # self.dp.process_update(update)
         self.updater.start_polling()
         self.updater.idle()
