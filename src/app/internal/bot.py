@@ -2,7 +2,7 @@
 from queue import Queue
 
 from telegram import Bot
-from telegram.ext import CommandHandler, ConversationHandler, Filters, MessageHandler, Dispatcher
+from telegram.ext import CommandHandler, ConversationHandler, Filters, MessageHandler, Dispatcher, Updater
 
 from app.internal.transport.bot.bank_handlers import balance_by_account, balance_by_card
 from app.internal.transport.bot.handlers import error, me, phone_num_handler, set_phone, start_command
@@ -10,9 +10,11 @@ from config.settings import API_TOKEN
 
 class TBot:
     def __init__(self):
-        self.bot = Bot(API_TOKEN)
+        # self.bot = Bot(API_TOKEN)
         # self.update_queue = Queue()
-        self.dp = Dispatcher(self.bot, update_queue=Queue())
+        # self.dp = Dispatcher(self.bot, update_queue=Queue())
+        self.updater = Updater(API_TOKEN, use_context=True)
+        self.dp = self.updater.dispatcher
         self.start()
 
     def start(self):
@@ -28,12 +30,13 @@ class TBot:
         self.dp.add_handler(CommandHandler("balance_by_account", balance_by_account))
         self.dp.add_error_handler(error)
 
-    def set_webhook(self):
-        self.bot.setWebhook(url="triplehover.backend22.2tapp.cc")
+    # def set_webhook(self):
+    #     self.bot.setWebhook(url="triplehover.backend22.2tapp.cc")
 
-    def webhook(self, update):
-        self.dp.process_update(update)
-
+    def poll(self, update):
+        # self.dp.process_update(update)
+        self.updater.start_polling()
+        self.updater.idle()
 
 # def start():
 #     updater = Updater(API_TOKEN, use_context=True)

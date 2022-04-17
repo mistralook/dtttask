@@ -6,5 +6,5 @@ from app.internal.bot import TBot
 class Command(BaseCommand):
     def handle(self, *args, **options):
         bot = TBot()
-        bot.set_webhook()
-        bot.start()
+        # bot.set_webhook()
+        bot.poll()
