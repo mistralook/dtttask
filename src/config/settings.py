@@ -30,7 +30,7 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG")
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", env("HOST_IP"), env("HOST_NAME")]
-CSRF_TRUSTED_ORIGINS = [f'https://{env("HOST_NAME")}']
+CSRF_TRUSTED_ORIGINS = [f'http://{env("HOST_NAME")}']
 
 # Application definition
 
