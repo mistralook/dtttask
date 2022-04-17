@@ -5,7 +5,7 @@ from django.urls import include, path
 from django.views.decorators.csrf import csrf_exempt
 
 from config.settings import API_TOKEN
-from app.internal.transport.bot.views import BotWebHookView
+# from app.internal.transport.bot.views import BotWebHookView
 
 urlpatterns = [
           path("admin/", admin.site.urls),
