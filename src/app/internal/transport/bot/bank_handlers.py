@@ -17,6 +17,18 @@ def check_balance_card(t_id, card_number):
     return balance
 
 
+def validate_amount(amount):
+    try:
+        amount = int(amount)
+        if amount < 0:
+            return "amount must be a positive number."
+        elif amount == 0:
+            return "amount must be bigger than zero"
+    except ValueError:
+        return "amount must be a positive number."
+    return amount
+
+
 def balance_by_card(update, context):
     t_id = update.message.from_user.id
     args = context.args
@@ -59,8 +71,10 @@ def transfer_money(update, context):
         )
     if len(args) == 3:
         sender_card = args[0].replace("-", "")
-        destination = args[1]
-        amount = args[2]
+        destination = args[1].replace("-", "")
+        amount = validate_amount(args[2])
+        if type(amount) is str:
+            return update.message.reply_text(f"Invalid amount. Reason: {amount}")
         answer = transfer_money_to_card(sender_card, destination, amount)
         update.message.reply_text(answer)
     else:
