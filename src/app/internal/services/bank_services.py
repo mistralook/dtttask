@@ -8,15 +8,15 @@ from .user_service import get_user, get_user_via_username
 
 @transaction.atomic
 def transfer_operation(from_card, to_card, amount):
-    from_card.balance -= decimal.Decimal(amount)
-    to_card.balance += decimal.Decimal(amount)
-    from_card.save()
-    to_card.save()
-    return f"The operation was successful. \n" \
-           f"from {from_card.card_number}({from_card.id}) \n" \
-           f"to {to_card.card_number}({to_card.id})" \
-           f"{amount} were sent"
-
+    # from_card.balance -= decimal.Decimal(amount)
+    # to_card.balance += decimal.Decimal(amount)
+    # from_card.save()
+    # to_card.save()
+    # return f"The operation was successful. \n" \
+    #        f"from {from_card.card_number}({from_card.id}) \n" \
+    #        f"to {to_card.card_number}({to_card.id})" \
+    #        f"{amount} were sent"
+    return f"{from_card.balance}, {type(from_card.balance)}, {from_card}, {amount}"
 
 def get_balance_by_card(t_id, card_number):
     try:
@@ -43,7 +43,7 @@ def transfer_money_to_card(source, destination, amount):
         source_card = Card.objects.get(card_number=source_card)
         receiver_card = Card.objects.get(card_number=destination)
         operation = transfer_operation(source_card, receiver_card, amount)
-        return f"{operation}, {source_card.balance}, {receiver_card.balance}"
+        return f"{operation}"
     except ValueError:  # login
         if "@" in destination:
             destination = destination[1:]
