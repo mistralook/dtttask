@@ -72,6 +72,8 @@ def transfer_money(update, context):
     if len(args) == 3:
         sender_card = args[0].replace("-", "")
         destination = args[1].replace("-", "")
+        if sender_card == destination:
+            "Invalid operation. You can't send money to yourself."
         amount = validate_amount(args[2])
         if type(amount) is str:
             return update.message.reply_text(f"Invalid amount. Reason: {amount}")
