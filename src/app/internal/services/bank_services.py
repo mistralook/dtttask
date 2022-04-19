@@ -1,3 +1,5 @@
+import decimal
+
 from app.internal.models.card import Card
 from django.db import transaction
 
@@ -6,8 +8,8 @@ from .user_service import get_user, get_user_via_username
 
 @transaction.atomic
 def transfer_operation(from_card, to_card, amount):
-    from_card.balance -= amount
-    to_card.balance += amount
+    from_card.balance -= decimal.Decimal(amount)
+    to_card.balance += decimal.Decimal(amount)
     from_card.save()
     to_card.save()
     return f"The operation was successful. \n" \
@@ -41,7 +43,7 @@ def transfer_money_to_card(source, destination, amount):
         source_card = Card.objects.get(card_number=source_card)
         receiver_card = Card.objects.get(card_number=destination)
         operation = transfer_operation(source_card, receiver_card, amount)
-        return operation
+        return f"{operation}, {source_card.balance}, {receiver_card.balance}"
     except ValueError:  # login
         if "@" in destination:
             destination = destination[1:]
