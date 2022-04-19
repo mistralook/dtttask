@@ -31,3 +31,11 @@ def check_authorization(t_id):
             return "", True
         else:
             return "Нужно ввести команду /set_phone!", False
+
+
+def get_user_via_username(username):
+    try:
+        user = User.objects.get(username=username)
+        return user
+    except ObjectDoesNotExist:
+        return None
