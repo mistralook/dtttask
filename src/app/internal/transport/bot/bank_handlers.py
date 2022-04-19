@@ -53,7 +53,17 @@ def transfer_money(update, context):
     args = context.args
     if not args:
         return update.message.reply_text(
-            "To transfer money, use this template: "
-            "/transfer_money (card_number) (card_number|telegram_login) (amount_of_money). "
+            "To transfer money, use this template:\n "
+            "/transfer_money (from_card_number) (to_card_number|to_telegram_login) (amount_of_money).\n "
             "F.e. /transfer_money 1111-2222-3333-4444 @Durov 1337"
+        )
+    if len(args) == 3:
+        sender_card = args[0].replace("-", "")
+        destination = args[1]
+        amount = args[2]
+        answer = transfer_money_to_card(sender_card, destination, amount)
+        update.message.reply_text(answer)
+    else:
+        return update.message.reply_text(
+            "Invalid command. Type '/transfer_money' to see the template."
         )
