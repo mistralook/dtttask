@@ -23,12 +23,11 @@ def get_balance_by_account(t_id, account_number):
 def transfer_money_to_card(source, destination, amount):
     try:
         destination = int(destination) # card
-        # card = Card.objects.get(card_number=destination).balance
-        # user = get_user_via_username()
-        # return card
+        card = Card.objects.get(card_number=destination).balance
+        return f"{card}"
     except ValueError: # login
         if "@" in destination:
             destination = destination[1:]
         receiver_card = Card.objects.get(owner_id=destination).balance
         return receiver_card
-    return f"{destination}, {type(destination)}"
+    # return f"{destination}, {type(destination)}"
