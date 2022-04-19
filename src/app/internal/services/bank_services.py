@@ -19,3 +19,6 @@ def get_balance_by_account(t_id, account_number):
         return None
     balance = sum([card.balance for card in cards])
     return balance
+
+def transfer_money_to_card():
+    pass

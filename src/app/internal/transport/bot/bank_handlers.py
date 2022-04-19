@@ -1,6 +1,6 @@
 import re
 
-from app.internal.services.bank_services import get_balance_by_account, get_balance_by_card
+from app.internal.services.bank_services import get_balance_by_account, get_balance_by_card, transfer_money_to_card
 
 
 def get_balance(t_id, subject, subject_number, balance_method):
@@ -46,3 +46,14 @@ def balance_by_account(update, context):
     account_number = args[0]
     balance = get_balance(t_id, "account", account_number, get_balance_by_account)
     update.message.reply_text(balance)
+
+
+def transfer_money(update, context):
+    t_id = update.message.from_user.id
+    args = context.args
+    if not args:
+        return update.message.reply_text(
+            "To transfer money, use this template: "
+            "/transfer_money (card_number) (card_number|telegram_login) (amount_of_money). "
+            "F.e. /transfer_money 1111-2222-3333-4444 @Durov 1337"
+        )
