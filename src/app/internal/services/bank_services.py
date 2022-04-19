@@ -51,7 +51,7 @@ def transfer_money_to_card(source, destination, amount):
         if "@" in destination:
             destination = destination[1:]
         user_id = User.objects.get(username=destination).id
-        receiver_card = Card.objects.get(owner_id=user_id).first() # Card not exist, user not exist
+        receiver_card = Card.objects.filter(owner_id=user_id).first() # Card not exist, user not exist
         operation = transfer_operation(source_card, receiver_card, amount)
     return f"{operation}"
 
