@@ -8,15 +8,16 @@ from .user_service import get_user, get_user_via_username
 
 @transaction.atomic
 def transfer_operation(from_card, to_card, amount):
-    # from_card.balance -= decimal.Decimal(amount)
-    # to_card.balance += decimal.Decimal(amount)
-    # from_card.save()
-    # to_card.save()
-    # return f"The operation was successful. \n" \
-    #        f"from {from_card.card_number}({from_card.id}) \n" \
-    #        f"to {to_card.card_number}({to_card.id})" \
-    #        f"{amount} were sent"
-    return f"{from_card.balance}, {type(from_card.balance)}, {from_card}, {amount}"
+    from_card.balance -= decimal.Decimal(amount)
+    to_card.balance += decimal.Decimal(amount)
+    from_card.save()
+    to_card.save()
+    return f"The operation was successful. \n" \
+           f"from {from_card.card_number}({from_card.id}) \n" \
+           f"to {to_card.card_number}({to_card.id})" \
+           f"{amount} were sent"
+    # return f"{from_card.balance}, {type(from_card.balance)}, {from_card}, {amount}"
+    # return f"{decimal.Decimal(from_card.balance)}"
 
 def get_balance_by_card(t_id, card_number):
     try:
