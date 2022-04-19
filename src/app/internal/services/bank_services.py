@@ -1,6 +1,6 @@
 from app.internal.models.card import Card
 
-from .user_service import get_user, get_user_via_username
+from .user_service import get_user
 
 
 def get_balance_by_card(t_id, card_number):
