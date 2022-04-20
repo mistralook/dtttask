@@ -5,7 +5,8 @@ from telegram import Bot
 from telegram.ext import CommandHandler, ConversationHandler, Filters, MessageHandler, Dispatcher, Updater
 
 from app.internal.transport.bot.bank_handlers import balance_by_account, balance_by_card, transfer_money
-from app.internal.transport.bot.handlers import error, me, phone_num_handler, set_phone, start_command, show_favourites
+from app.internal.transport.bot.handlers import error, me, phone_num_handler, set_phone, start_command, show_favourites, \
+    add_to_favourites, remove_from_favourites
 from config.settings import API_TOKEN
 
 class TBot:
@@ -30,6 +31,8 @@ class TBot:
         self.dp.add_handler(CommandHandler("balance_by_account", balance_by_account))
         self.dp.add_handler(CommandHandler("transfer_money", transfer_money))
         self.dp.add_handler(CommandHandler("show_favourites", show_favourites))
+        self.dp.add_handler(CommandHandler("add_to_favourites", add_to_favourites))
+        self.dp.add_handler(CommandHandler("remove_from_favourites", remove_from_favourites))
         self.dp.add_error_handler(error)
 
     # def set_webhook(self):

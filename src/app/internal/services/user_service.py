@@ -45,3 +45,28 @@ def show_user_favourites(t_id):
     user = get_user(t_id)
     return f"Your favourites:\n" \
            f"{user.favourites}"
+
+
+def add_to_user_favourites(t_id, user_to_add):
+    user = get_user(t_id)
+    if "@" in user_to_add:
+        user_to_add = user_to_add[1:]
+    featured_user = get_user_via_username(user_to_add)
+    if featured_user is None:
+        return "Invalid operation. The user to add does not exist"
+    user.favourites.add(featured_user)
+    user.save()
+    return f"{featured_user.username} was successfully added to your favourites list"
+
+
+def remove_from_user_favourites(t_id, user_to_remove):
+    user = get_user(t_id)
+    if "@" in user_to_remove:
+        user_to_remove = user_to_remove[1:]
+    featured_user_to_remove = get_user_via_username(user_to_remove)
+    if featured_user_to_remove is None:
+        return "Invalid operation. The user to remove does not exist"
+    user.favourites.remove(featured_user_to_remove)
+    user.save()
+    return f"{featured_user_to_remove.username} was successfully removed from your favourites list"
+

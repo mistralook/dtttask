@@ -3,7 +3,7 @@ import re
 from telegram.ext import ConversationHandler
 
 from app.internal.services.user_service import check_authorization, create_user, get_user, save_phone_number, \
-    show_user_favourites
+    show_user_favourites, add_to_user_favourites, remove_from_user_favourites
 
 
 def start_command(update, context):
@@ -59,6 +59,44 @@ def show_favourites(update, context):
     reason, authorized = check_authorization(t_id)
     if authorized:
         answer = show_user_favourites(t_id)
+        update.message.reply_text(answer)
+    else:
+        update.message.reply_text(reason)
+
+
+def add_to_favourites(update, context):
+    t_id = update.message.from_user.id
+    args = context.args
+    reason, authorized = check_authorization(t_id)
+    if not args:
+        return update.message.reply_text(
+            "To add user to favourites list, use this template:\n "
+            "/add_to_favourites (login)\n "
+            "F.e. /add_to_favourites @Durov"
+        )
+
+    if authorized:
+        user_to_add = args[0]
+        answer = add_to_user_favourites(t_id, user_to_add)
+        update.message.reply_text(answer)
+    else:
+        update.message.reply_text(reason)
+
+
+def remove_from_favourites(update, context):
+    t_id = update.message.from_user.id
+    args = context.args
+    reason, authorized = check_authorization(t_id)
+    if not args:
+        return update.message.reply_text(
+            "To remove user from favourites list, use this template:\n "
+            "/remove_from_favourites (login)\n "
+            "F.e. /remove_from_favourites @Durov"
+        )
+
+    if authorized:
+        user_to_remove = args[0]
+        answer = remove_from_user_favourites(t_id, user_to_remove)
         update.message.reply_text(answer)
     else:
         update.message.reply_text(reason)
