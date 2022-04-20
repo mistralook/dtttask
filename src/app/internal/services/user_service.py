@@ -44,4 +44,4 @@ def get_user_via_username(username):
 def show_user_favourites(t_id):
     user = get_user(t_id)
     return f"Your favourites:\n" \
-           f"{', '.join(user.favourites)}"
+           f"{user.favourites}"
