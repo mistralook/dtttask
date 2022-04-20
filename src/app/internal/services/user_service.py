@@ -43,8 +43,9 @@ def get_user_via_username(username):
 
 def show_user_favourites(t_id):
     user = get_user(t_id)
+    favourites = list(user.favourites.all().values_list())
     return f"Your favourites:\n" \
-           f"{list(user.favourites.all().values_list())}"
+           f"{[f'{u[0]} (@{u[2]})' for u in favourites]}"
 
 
 def add_to_user_favourites(t_id, user_to_add):
@@ -63,9 +64,13 @@ def remove_from_user_favourites(t_id, user_to_remove):
     user = get_user(t_id)
     if "@" in user_to_remove:
         user_to_remove = user_to_remove[1:]
+    favourites = list(user.favourites.all().values_list())
+    is_user_in_favourites = any([u[2] == user_to_remove for u in favourites])
+    if not is_user_in_favourites:
+        return "Invalid operation. User is not in your favourites list"
     featured_user_to_remove = get_user_via_username(user_to_remove) # ремувать только тех, которые есть в favourites
-    if featured_user_to_remove is None:
-        return "Invalid operation. The user to remove does not exist"
+    # if featured_user_to_remove is None:
+    #     return "Invalid operation. The user to remove does not exist"
     user.favourites.remove(featured_user_to_remove)
     user.save()
     return f"{featured_user_to_remove.username} was successfully removed from your favourites list"
