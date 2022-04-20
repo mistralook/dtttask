@@ -66,7 +66,7 @@ def transfer_money_to_card(source, destination, amount):
         user_id = get_user_via_username(destination)
         if user_id is None:
             return "Invalid receiver. User does not exist."
-        receiver_card = Card.objects.filter(owner_id=user_id).first()  # Card not exist, user not exist
+        receiver_card = Card.objects.filter(owner_id=user_id).first()
         if receiver_card is None:
             return "Invalid receiver. User does not have cards."
         operation = transfer_operation(source_card, receiver_card, amount)
