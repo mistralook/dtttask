@@ -2,7 +2,8 @@ import re
 
 from telegram.ext import ConversationHandler
 
-from app.internal.services.user_service import check_authorization, create_user, get_user, save_phone_number
+from app.internal.services.user_service import check_authorization, create_user, get_user, save_phone_number, \
+    show_user_favourites
 
 
 def start_command(update, context):
@@ -49,6 +50,16 @@ def me(update, context):
 Номер телефона: {user_info.phone}
         """
         )
+    else:
+        update.message.reply_text(reason)
+
+
+def show_favourites(update, context):
+    t_id = update.message.from_user.id
+    reason, authorized = check_authorization(t_id)
+    if authorized:
+        answer = show_user_favourites(t_id)
+        update.message.reply_text(answer)
     else:
         update.message.reply_text(reason)
 

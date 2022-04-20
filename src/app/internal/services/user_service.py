@@ -39,3 +39,9 @@ def get_user_via_username(username):
         return user
     except ObjectDoesNotExist:
         return None
+
+
+def show_user_favourites(t_id):
+    user = get_user(t_id)
+    return f"Your favourites:\n" \
+           f"{', '.join(user.favourites)}"
